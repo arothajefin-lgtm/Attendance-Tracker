@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; -webkit-tap-highlight-color: transparent; color: #1f2937; }
         .shift-a { background-color: #dcfce7 !important; color: #15803d !important; border: 2.5px solid #15803d !important; }
         .shift-b { background-color: #dbeafe !important; color: #1d4ed8 !important; border: 2.5px solid #1d4ed8 !important; }
         .shift-c { background-color: #fef9c3 !important; color: #a16207 !important; border: 2.5px solid #a16207 !important; }
@@ -19,7 +19,6 @@
         .shift-tag { font-size: 9px; font-weight: 900; margin-top: 2px; text-transform: uppercase; }
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 50; backdrop-filter: blur(4px); }
         .modal.active { display: flex; }
-        #botHelperMenu { transition: all 0.2s ease-in-out; transform-origin: top right; }
     </style>
 </head>
 <body class="pb-10">
@@ -44,8 +43,8 @@
         
         <div id="calendarGrid" class="bg-white rounded-3xl shadow-sm p-3 mb-6 border border-gray-100 grid grid-cols-7 text-center text-xs"></div>
         
-        <div class="bg-white p-5 rounded-3xl shadow-sm border-l-8 border-rose-500 mb-6 text-center">
-            <div class="grid grid-cols-5 gap-2 text-[10px] font-bold">
+        <div class="bg-white p-5 rounded-3xl shadow-sm border-l-8 border-rose-500 mb-6">
+            <div class="grid grid-cols-5 gap-2 text-[10px] font-bold text-center">
                 <div class="p-2 bg-blue-50 rounded-lg"><p>DUTY</p><p id="statDuty" class="text-lg font-black text-blue-700">0</p></div>
                 <div class="p-2 bg-orange-50 rounded-lg"><p>OT</p><p id="statOt" class="text-lg font-black text-orange-700">0</p></div>
                 <div class="p-2 bg-gray-50 rounded-lg"><p>OFF</p><p id="statOff" class="text-lg font-black text-gray-700">0</p></div>
@@ -56,32 +55,21 @@
     </main>
 
     <div id="settingsModal" class="modal px-4">
-        <div class="bg-white w-full max-w-sm rounded-[2rem] p-7 shadow-2xl max-h-[90vh] overflow-y-auto text-gray-800">
-            
+        <div class="bg-white w-full max-w-sm rounded-[2rem] p-7 shadow-2xl max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center mb-6 relative">
                 <h3 class="font-black text-xl flex-1 text-center ml-10">⚙️ Settings</h3>
-                
-                <button onclick="toggleBotHelper()" class="w-10 h-10 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-xl shadow-sm border border-blue-100 active:scale-90 transition-transform">
-                    🤖
-                </button>
-                
-                <div id="botHelperMenu" class="hidden absolute top-12 right-0 w-48 bg-white rounded-2xl shadow-2xl border border-gray-100 z-50 overflow-hidden ring-4 ring-black ring-opacity-5">
-                    <a href="https://t.me/userinfobot" target="_blank" class="flex items-center gap-2 p-3 text-[10px] font-bold text-gray-700 hover:bg-blue-50 border-b border-gray-50">
-                        🔍 Find My Chat ID
-                    </a>
-                    <a href="https://t.me/@Jefin143_bot" id="botLink" target="_blank" class="flex items-center gap-3 p-3 text-[10px] font-bold text-gray-700 hover:bg-blue-50">
-                        🤖 Open Backup Bot
-                    </a>
+                <button onclick="toggleBotHelper()" class="w-10 h-10 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-xl border border-blue-100">🤖</button>
+                <div id="botHelperMenu" class="hidden absolute top-12 right-0 w-48 bg-white rounded-2xl shadow-2xl border z-50 overflow-hidden ring-4 ring-black ring-opacity-5">
+                    <a href="https://t.me/userinfobot" target="_blank" class="flex items-center gap-2 p-3 text-[10px] font-bold text-gray-700 hover:bg-blue-50 border-b">🔍 Find My Chat ID</a>
+                    <a href="https://t.me/Jefin143_bot" target="_blank" class="flex items-center gap-3 p-3 text-[10px] font-bold text-gray-700 hover:bg-blue-50">🤖 Open Backup Bot</a>
                 </div>
             </div>
             
-            <div class="p-4 bg-blue-50 rounded-2xl border border-blue-100 mb-4 shadow-inner">
+            <div class="p-4 bg-blue-50 rounded-2xl border border-blue-100 mb-4">
                 <p class="text-[10px] font-bold text-blue-700 mb-2 uppercase text-center tracking-widest">Telegram Backup</p>
-                <input type="text" id="userChatId" class="w-full p-2 mb-3 text-xs border rounded-lg focus:ring-2 focus:ring-blue-400 outline-none" placeholder="Chat ID നൽകുക">
-                <button onclick="saveChatId()" class="w-full py-2 bg-blue-500 text-white rounded-lg font-bold text-xs mb-3 shadow-md active:scale-95 transition-transform">Save Chat ID</button>
-                <button onclick="backupToTelegram()" class="w-full py-3 bg-blue-700 text-white rounded-xl font-black flex items-center justify-center gap-2 shadow-lg active:scale-95 transition-transform">
-                    <span>📤</span> Manual Backup
-                </button>
+                <input type="text" id="userChatId" class="w-full p-2 mb-3 text-xs border rounded-lg outline-none" placeholder="Chat ID നൽകുക">
+                <button onclick="saveChatId()" class="w-full py-2 bg-blue-500 text-white rounded-lg font-bold text-xs mb-3 shadow-md">Save Chat ID</button>
+                <button onclick="backupToTelegram()" class="w-full py-3 bg-blue-700 text-white rounded-xl font-black flex items-center justify-center gap-2 shadow-lg"><span>📤</span> Manual Backup</button>
                 <p id="lastBackupText" class="text-[9px] text-gray-500 mt-2 text-center italic"></p>
             </div>
 
@@ -91,8 +79,8 @@
                     <input type="month" id="rangeFrom" class="w-1/2 p-2 text-xs border rounded-lg outline-none">
                     <input type="month" id="rangeTo" class="w-1/2 p-2 text-xs border rounded-lg outline-none">
                 </div>
-                <button onclick="calculateRange()" class="w-full py-2 bg-slate-800 text-white rounded-lg font-black text-xs active:scale-95">View Report</button>
-                <div id="rangeResults" class="hidden mt-3 grid grid-cols-2 gap-2 text-[10px] font-bold p-3 bg-white rounded-xl border border-gray-100 shadow-inner">
+                <button onclick="calculateRange()" class="w-full py-2 bg-slate-800 text-white rounded-lg font-black text-xs">View Report</button>
+                <div id="rangeResults" class="hidden mt-3 grid grid-cols-2 gap-2 text-[10px] font-bold p-3 bg-white rounded-xl border">
                     <p>Duty: <span id="rDuty" class="text-blue-600">0</span></p><p>OT: <span id="rOt" class="text-orange-600">0</span></p>
                     <p>Off: <span id="rOff" class="text-gray-600">0</span></p><p>Holi: <span id="rHoliday" class="text-purple-600">0</span></p>
                     <p class="col-span-2">Leave: <span id="rLeave" class="text-red-600">0</span></p>
@@ -101,7 +89,7 @@
 
             <div class="p-4 bg-green-50 rounded-2xl border border-green-200 mb-4 text-center">
                 <input type="file" id="restoreFile" class="hidden" accept=".html" onchange="handleRestore(event)">
-                <button onclick="document.getElementById('restoreFile').click()" class="w-full py-3 bg-white border-2 border-green-300 text-green-700 rounded-xl font-black text-xs hover:bg-green-100 transition-colors">📥 Restore Backup File</button>
+                <button onclick="document.getElementById('restoreFile').click()" class="w-full py-3 bg-white border-2 border-green-300 text-green-700 rounded-xl font-black text-xs hover:bg-green-100">📥 Restore Backup File</button>
                 <p class="text-[8px] text-gray-400 mt-2 italic">Restore ചെയ്യുമ്പോൾ Chat ID-യും തിരികെ വരും.</p>
             </div>
 
@@ -134,21 +122,17 @@
 
     <script>
         const commonBotToken = '7909722913:AAEQhIp7o5WhVSZUjgLYA8qAO25FPmj6s0o'; 
-        const botUsername = "@Jefin143_bot"; // നിങ്ങളുടെ ബോട്ടിന്റെ Username
+        const botUsername = "Jefin143_bot"; 
         
         let currentDate = new Date();
         let attendanceData = JSON.parse(localStorage.getItem('apollo_attendance') || '{}');
         let selectedKey = null, activeShift = null;
         const monthsML = ["ജനുവരി", "ഫെബ്രുവരി", "മാർച്ച്", "ഏപ്രിൽ", "മേയ്", "ജൂൺ", "ജൂലൈ", "ഓഗസ്റ്റ്", "സെപ്റ്റംബർ", "ഒക്ടോബർ", "നവംബർ", "ഡിസംബർ"];
 
-        // --- Bot Helper UI Logic ---
         function toggleBotHelper() {
-            const menu = document.getElementById('botHelperMenu');
-            menu.classList.toggle('hidden');
-            document.getElementById('botLink').href = `https://t.me/${botUsername}`;
+            document.getElementById('botHelperMenu').classList.toggle('hidden');
         }
 
-        // --- Weekly Auto Backup Logic ---
         async function checkWeeklyBackup() {
             const lastBackup = localStorage.getItem('apollo_last_backup');
             const today = new Date();
@@ -172,9 +156,9 @@
             formData.append('chat_id', id); 
             formData.append('document', new Blob([fileHTML], {type:'text/html'}), `Auto_Backup_${new Date().toISOString().slice(0,10)}.html`);
             try { 
-                const res = await fetch(`https://api.telegram.org/bot${commonBotToken}/sendDocument`, {method:'POST', body:formData}); 
-                if(res.ok) localStorage.setItem('apollo_last_backup', new Date().toISOString());
-            } catch(e) { console.error("Auto backup failed"); }
+                fetch(`https://api.telegram.org/bot${commonBotToken}/sendDocument`, {method:'POST', body:formData}); 
+                localStorage.setItem('apollo_last_backup', new Date().toISOString());
+            } catch(e) {}
         }
 
         function updateBackupStatus() {
@@ -182,7 +166,6 @@
             if(last) document.getElementById('lastBackupText').innerText = `Last Backup: ${new Date(last).toLocaleDateString()}`;
         }
 
-        // --- Range Report Logic ---
         function calculateRange() {
             const f = document.getElementById('rangeFrom').value, t = document.getElementById('rangeTo').value;
             if(!f || !t) return alert("Select months");
@@ -201,29 +184,25 @@
             document.getElementById('rangeResults').classList.remove('hidden');
         }
 
-        // --- Core Functions ---
         function saveChatId() {
             const id = document.getElementById('userChatId').value;
-            if(id) { localStorage.setItem('apollo_chat_id', id); alert("Chat ID സേവ് ചെയ്തു! ✅"); }
+            if(id) { localStorage.setItem('apollo_chat_id', id); alert("Saved! ✅"); }
         }
 
         async function backupToTelegram() {
             const id = localStorage.getItem('apollo_chat_id');
-            if(!id) return alert("Settings-ൽ Chat ID നൽകുക!");
+            if(!id) return alert("Chat ID നൽകുക!");
             const data = localStorage.getItem('apollo_attendance') || '{}';
             const backupData = JSON.stringify({ attendance: data, chatId: id });
-            const fileHTML = `<!DOCTYPE html><html><body><div id="dataStore" style="display:none;">${backupData}</div><p>Apollo Full Backup</p></body></html>`;
+            const fileHTML = `<!DOCTYPE html><html><body><div id="dataStore" style="display:none;">${backupData}</div><p>Manual Backup</p></body></html>`;
             const formData = new FormData();
             formData.append('chat_id', id); 
             formData.append('document', new Blob([fileHTML], {type:'text/html'}), `Apollo_Backup_${new Date().toISOString().slice(0,10)}.html`);
             try { 
                 const res = await fetch(`https://api.telegram.org/bot${commonBotToken}/sendDocument`, {method:'POST', body:formData}); 
-                if(res.ok) {
-                    alert('ബാക്കപ്പ് അയച്ചു! ✅');
-                    localStorage.setItem('apollo_last_backup', new Date().toISOString());
-                    updateBackupStatus();
-                } else alert('ID ശരിയാണോ എന്ന് പരിശോധിക്കുക.');
-            } catch(e) { alert('Telegram Connection Error!'); }
+                if(res.ok) { alert('ബാക്കപ്പ് അയച്ചു! ✅'); localStorage.setItem('apollo_last_backup', new Date().toISOString()); updateBackupStatus(); }
+                else alert('Telegram Error! ID പരിശോധിക്കുക.');
+            } catch(e) { alert('Connection Error!'); }
         }
 
         function handleRestore(event) {
@@ -232,11 +211,10 @@
             reader.onload = function(e) {
                 try {
                     const doc = new DOMParser().parseFromString(e.target.result, 'text/html');
-                    const parsed = JSON.parse(doc.getElementById('dataStore').innerText);
-                    localStorage.setItem('apollo_attendance', parsed.attendance);
-                    if(parsed.chatId) {
-                        localStorage.setItem('apollo_chat_id', parsed.chatId);
-                    }
+                    const rawData = doc.getElementById('dataStore').innerText;
+                    let parsed = JSON.parse(rawData);
+                    localStorage.setItem('apollo_attendance', parsed.attendance || rawData);
+                    if(parsed.chatId) localStorage.setItem('apollo_chat_id', parsed.chatId);
                     alert('വിജയകരമായി Restore ചെയ്തു! ✅'); location.reload();
                 } catch(err) { alert('Invalid File! ❌'); }
             };
@@ -299,10 +277,7 @@
 
         function changeMonth(d) { currentDate.setMonth(currentDate.getMonth() + d); renderCalendar(); }
         function openSettings() { document.getElementById('settingsModal').classList.add('active'); }
-        function closeModal(id) { 
-            document.getElementById(id).classList.remove('active'); 
-            document.getElementById('botHelperMenu').classList.add('hidden'); // മെനുവും അടയ്ക്കുന്നു
-        }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); document.getElementById('botHelperMenu').classList.add('hidden'); }
         
         window.onload = () => {
             renderCalendar();
@@ -312,4 +287,3 @@
     </script>
 </body>
 </html>
-    
