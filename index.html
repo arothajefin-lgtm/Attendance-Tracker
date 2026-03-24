@@ -73,7 +73,15 @@
                 <p id="lastBackupText" class="text-[9px] text-gray-500 mt-2 text-center italic"></p>
             </div>
 
-            <div class="p-4 bg-gray-50 rounded-2xl border border-gray-100 mb-4">
+            <div class="mt-4 p-4 bg-green-50 rounded-2xl border border-green-200 text-center">
+    <input type="file" id="restoreFile" class="hidden" accept=".html" onchange="handleRestore(event)">
+    <button onclick="document.getElementById('restoreFile').click()" class="w-full py-3 bg-white border-2 border-green-300 text-green-700 rounded-xl font-black text-xs hover:bg-green-100 flex items-center justify-center gap-2">
+        <span>📥</span> Restore Backup File
+    </button>
+    <p class="text-[8px] text-gray-400 mt-2 italic">നിങ്ങളുടെ പഴയ ബാക്കപ്പ് ഫയൽ ഇവിടെ അപ്‌ലോഡ് ചെയ്യുക.</p>
+            </div>
+            
+          <div class="p-4 bg-gray-50 rounded-2xl border border-gray-100 mb-4">
                 <h4 class="font-bold text-sm text-gray-700 mb-3 underline decoration-gray-300">Range Report</h4>
                 <div class="flex gap-2 mb-3">
                     <input type="month" id="rangeFrom" class="w-1/2 p-2 text-xs border rounded-lg outline-none">
